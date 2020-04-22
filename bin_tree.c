@@ -27,39 +27,6 @@ void print_inorder (TreeNode_t* node) {
     print_inorder (node->right);
 }
 
-#if 0
-void print_pre_order (TreeNode_t* node) {
-    if (node == NULL)
-        return;
-
-    /* first print data of node */
-    printf ("%d ", node->val);
-
-    /* then recur on left sutree */
-    printPreorder (node->left);
-
-    /* now recur on right subtree */
-    printPreorder (node->right);
-}
-#endif
-
-#if 0
-/* Given a binary tree, print its nodes according to the
- "bottom-up" postorder traversal. */
-void print_post_order (TreeNode_t* node) {
-    if (node == NULL)
-        return;
-
-    // first recur on left subtree
-    printPostorder (node->left);
-
-    // then recur on right subtree
-    printPostorder (node->right);
-
-    // now deal with the node
-    printf ("%d ", node->val);
-}
-#endif
 
 bool is_node_has_vacant (TreeNode_t * root) {
     bool res = false;
@@ -74,7 +41,6 @@ bool is_node_has_vacant (TreeNode_t * root) {
     return res;
 }
 
-//get fist node with spare leaf
 TreeNode_t *get_first_spare_leaf_node (TreeNode_t * root) {
     TreeNode_t *outNode = NULL;
     TreeNode_t *someSpareNode = get_first_spare_node (root);
@@ -247,76 +213,6 @@ int get_parent_index (int nodeIndex, int size) {
     return outParent;
 }
 
-#if 0
-static int get_left_child_index (int perent, int sizeOfArr) {
-    int leftChild = perent * 2 + 1;
-    if (sizeOfArr < leftChild) {
-        printf ("\nError out of array %d\n", leftChild);
-        leftChild = 0;
-    }
-    return leftChild;
-}
-
-static bool is_left_son_exist (int patentIndex, int *arr, int size) {
-    bool res = false;
-    int leftSonIndex = get_left_child_index (patentIndex, size);
-    if (NOT_NUM != arr [leftSonIndex]) {
-        res = true;
-    }
-    return res;
-}
-static int get_right_child_index (int parentIndex, int sizeOfArr) {
-    int rightChild = parentIndex * 2 + 2;
-    if (sizeOfArr < rightChild) {
-        printf ("\nError out of array %d\n", rightChild);
-        rightChild = 0;
-    }
-    return rightChild;
-}
-
-static bool is_right_son_exist (int parentIndex, int *arr, int size) {
-    bool res = false;
-    int rightSonIndex = get_right_child_index (parentIndex, size);
-    if (NOT_NUM != arr [rightSonIndex]) {
-        res = true;
-    }
-    return res;
-}
-
-void parse_bin_tree (int *arr, int size) {
-    bool res = false;
-    for (int i = 0; i < size; i++) {
-        printf ("\narr[%d] %d", i, arr [i]);
-        if (NOT_NUM != arr [i]) {
-            res = is_left_son_exist (i, arr, size);
-            if (false == res) {
-                printf ("\nlack of L son for %d", i);
-            }
-            res = is_right_son_exist (i, arr, size);
-            if (false == res) {
-                printf ("\nlack of R son for %d", i);
-            }
-        }
-        //printf ("\n index %d expLindex %d expRindex %d", i, get_left_child_index (i, 1000), get_right_child_index (i, 1000));
-
-        //int patentVal = arr [get_parent_index (i, size)];
-        //if (NOT_NUM == patentVal) {
-        //    printf ("\ni does not have parent %d\n", i);
-        //}
-        //if (NOT_NUM != arr [i]) {
-        //    printf ("\n%d L(%d) R(%d)", arr [i], arr [get_left_child (i, size)], arr [get_right_child (i, size)]);
-        //}
-    }
-}
-#endif
-
-int deepestLeavesSum (TreeNode_t * root) {
-    int sum = 0;
-    int maxDepth = 0;
-    maxDepth = max_depth (root);
-    sum = calc_leaves_sum (root, maxDepth);
-    return sum;
-}
 
 bool init_tree_node (TreeNode_t * NodePar, int val, TreeNode_t * NodeLeftChild, TreeNode_t * NodeRightChild) {
     bool res = false;
